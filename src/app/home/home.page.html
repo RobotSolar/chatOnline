@@ -1,13 +1,28 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-title>
-      Ionic Blank
+      Mi chat App
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
- 
-  <ion-button (click)="Onlogout()" >desconectarse</ion-button>
+
+  <ion-list>
+      <ion-item *ngFor ="let chat of chatRooms" (click)="openChat(chat)">
+        <ion-avatar slot="start">
+          <ion-img [src]="chat.img"></ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h2> <b>{{chat.name}}</b> </h2>
+          <p>{{chat.description}}</p>
+        </ion-label>
+      </ion-item>
+    
+  </ion-list>
+
+
+
+  <!-- <ion-button (click)="Onlogout()" >desconectarse</ion-button> -->
 
 </ion-content>
