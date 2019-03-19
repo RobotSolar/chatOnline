@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from "@angular/fire/firestore";
 import { map } from "rxjs/operators";
+import { message } from "../models/message";
+import { firestore } from 'firebase';
 
 export interface chat {
   description : string
@@ -26,6 +28,18 @@ export class ChatsService {
         return data;
       })
     }))
+  }
+
+  getChatRoom( chat_id : string){
+    return this.db.collection('chatsRooms').doc(chat_id).valueChanges()
+  }
+
+
+  sendMsgToFirebase( message : message, chat_id : string){
+
+    this.db.collection('chatsRooms').doc(chat_id).update({
+      messages : firestore.FieldValue.arrayUnion(message),
+    })
   }
 
 
